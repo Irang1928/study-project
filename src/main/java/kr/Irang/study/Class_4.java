@@ -38,6 +38,10 @@ public class Class_4 {
         System.out.println(Integer.parseInt("2022", 10));      // 2022
         System.out.println(Integer.parseInt("1", 2));          // 1
         System.out.println(Integer.parseInt("1001", 2));       // 9
+        System.out.println(Integer.parseInt(1004, 8));         // 516
+        System.out.println(Integer.parseInt("A", 16));         // 10
+        System.out.println(Integer.parseInt("F", 16));         // 15
+        System.out.println(Integer.parseInt("FF", 16));        // 255
 
         System.out.println("-----------------------[진수 지정]");
 
