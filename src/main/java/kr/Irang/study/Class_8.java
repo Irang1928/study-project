@@ -80,6 +80,17 @@ public class Class_8 {
         System.out.println(h1.age);
         System.out.println(h1.gender);  // 부모 클래스 필드(변수)
         System.out.println(h1.power);   // 부모 클래스 필드(변수)
+        h1.walk();                      // 메서드 오버라이딩
+        h1.eat();
+        h1.displayPerson();
+
+        // [3] : 원더우먼 객체 생성
+        Hero h2 = new Hero("원더우먼", 30);
+        h2.displayPerson();
+        h2.gender = 2;
+        h2.power = 300;
+        h2.displayPerson();
+        h2.walk();
 
     }
 }
