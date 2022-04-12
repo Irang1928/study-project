@@ -23,6 +23,7 @@ package kr.Irang.study;
 // 자바에서 클래스는 "단일 상속"만 가능하지만, 인터페이스는 "다중 상속"이 가능하다.
 // 그러나 인터페이스는 extends 표현을 쓰지않고 "구현"의 의미를 강조하는 implements 키워드를 사용하여 다중 상속을 구현한다.
 
+//-------------------------------------------------------------------------------------------------------------------
 
 // [1] : 인터페이스
 // 추상 클래스와 거의 비슷하나 그 추상화 정도가 더 높다(더 엄격). --> 일반 메서드나 멤버 필드(변수)를 가질 수 없다.
@@ -36,5 +37,100 @@ package kr.Irang.study;
 // class --> extends,   interface --> implements --> 다중 상속을 구현 --> A, B --> 콤마(,)로 분리
 // 즉, 이를 이용하면 여러 개의 인터페이스로부터 메서드를 받아올 수 있게 된다. --> 다중 상속 구현.
 
-public class Interface {
+// [3] : 장점
+// 인터페이스를 이용하면 메서드의 추상적인 "선언"과 그 메서드들을 구체적인 "구현"부분을 분리시킬 수 있다. --> 매우 큰 장점.
+// 하청을 주는 대기업(갑)은 하청업체(을)에 인터페이스만 제공 --> 각 하청업체(을)들이 이를 준수하여(=상속 받아) 개발.
+// 분업화된 시스템을 구축하여 "갑"과 "을"이 독립적으로 프로젝트 개발을 해나갈 수 있다. --> 매우 큰 장점.
+
+// [4] : 우선 순위 (extends vs implements)
+// 상속을 받는 extends 키워드와 구현을 하는 implements 키워드가 동시에 쓰일 때 --> extends 키워드가 항상 먼저 쓰인다.
+// 예시) class Student extends Person implements A, B
+
+//------------------------------------------------------------------------------------------------------------------
+
+// Person 클래스(부모)
+
+// A 인터페이스(부모)
+
+// B 인터페이스(부모)
+
+// Student 클래스(자식)
+
+// 메인 클래스(메인 메서드가 포함)
+
+class Person6 {
+    // Field
+    String name;
+    int age;
+    int weight;
+
+    // Constructor
+    Person6() {}
+    Person6(String name, int age, int weight) {
+        this.name = name;
+        this.age = age;
+        this.weight = weight;
+    }
+
+    // Method
+    void wash() {System.out.println("씻다.");}
+    void study() {System.out.println("공부하다.");}
+    void play() {System.out.println("놀다.");}
 }
+
+interface Allowance {
+    // Field
+    // 변수는 안되나 상수는 되므로 상수로 지정해주면 됨 --> public static final 을 붙여주면 됨.
+    // 인터페이스내 모든 멤버 필드(변수)는 public static final 이여야 함. --> 생략이 가능. --> 그냥 "타입 상수명" 지정해서 쓰면 됨.
+    public static final String aaa = "코리아";
+    int bbb = 100;
+
+    // Abstract Method
+    // 인터페이스내 모든 메서드는 public abstract 이어야 함 --> 생략이 가능.
+    public abstract void in(int price, String name);
+    abstract void out(int price, String name);
+}
+
+interface Train {
+    // Abstract Method
+    abstract void train(int training_pay, String name);
+}
+
+class Student extends Person6 implements Allowance, Train {
+    // Field
+
+    // Constructor
+    Student() {}
+    Student(String name, int age, int weight) {
+        super(name, age, weight);
+    }
+
+    // Method
+    public void in(int price, String name) {System.out.printf("%s에게서 %d원 용돈을 받았습니다.%n", name, price);}
+    public void out(int price, String name) {System.out.printf("%d원 금액을 지출했습니다. [지출용도 --> %s]%n", price, name);}
+    public void train(int training_pay, String name) {System.out.printf("[%s --> %d원 입금완료]%n", name, training_pay);}
+}
+
+public class Interface {
+    public static void main(String[] args) {
+
+        // [1] : 객체 생성
+        Student s1 = new Student("홍길동", 20, 85);
+
+        // [2] : 클래스와 인터페이스로부터 상속(person)과 구현(Allowance, Train)을 한 메서드들 호출하기
+        s1.wash();
+        s1.study();
+        s1.play();
+        s1.in(10000, "엄마");
+        s1.out(5000, "편의점");
+        s1.train(20000, "훈련비");
+
+        // [3] : 상수 필드 사용하기
+        System.out.println(s1.aaa);
+        System.out.println(s1.bbb);
+        System.out.println(Allowance.aaa);  // static 이므로 객체 생성 필요없음.
+        System.out.println(Allowance.bbb);  // static 이므로 객체 생성 필요없음.
+
+    }
+}
+
